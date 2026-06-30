@@ -1,0 +1,24 @@
+# Git and Ignore files
+.git
+.gitignore
+.dockerignore
+
+# Documentation and CI/CD
+readme.md
+.github/
+.snyk
+.trivyignore
+
+# Infrastructure and Deployment (Not needed inside the app container)
+terraform/
+k8s/
+argocd/
+scripts/
+
+# Local Node files
+app/node_modules
+app/coverage
+app/npm-debug.log
+
+# Tests (We run tests in CI or multi-stage build, no need to bloat the final image context)
+app/tests/

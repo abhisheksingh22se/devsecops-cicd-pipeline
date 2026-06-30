@@ -1,0 +1,11 @@
+version: v1.25.0
+exclude:
+  global:
+    # Ignore the tests directory during vulnerability scanning
+    - app/tests/**/*
+ignore:
+  # Example syntax for ignoring a specific vulnerability ID:
+  # 'snyk:vuln:SNYK-JS-LODASH-567746':
+  #   - '*':
+  #       reason: 'Mitigated by WAF'
+  #       expires: '2026-12-31T00:00:00.000Z'

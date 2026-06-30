@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: devsecops-project
+  namespace: argocd
+spec:
+  description: "Security-focused project for the DevSecOps application"
+  
+  # Allow manifests to be pulled only from this specific Git repository
+  sourceRepos:
+    - "https://github.com/abhisheksingh22se/devsecops-pipeline.git"
+
+  # Restrict deployments strictly to the local EKS cluster 
+  # and only allow targeting the dev, staging, and prod namespaces.
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: dev
+    - server: https://kubernetes.default.svc
+      namespace: staging
+    - server: https://kubernetes.default.svc
+      namespace: prod
+
+  # Cluster resource whitelist (preventing unauthorized creation of ClusterRoles, etc.)
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace

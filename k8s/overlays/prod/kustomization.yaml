@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: prod
+
+resources:
+  - ../../base
+
+commonLabels:
+  environment: prod
+
+images:
+  - name: app
+    newName: 123456789012.dkr.ecr.us-east-1.amazonaws.com/devsecops-demo
+    # In a real CI/CD flow, your GitHub Actions pipeline will dynamically 
+    # replace this 'stable' tag with a specific Git commit SHA (e.g., a1b2c3d) 
+    # before ArgoCD syncs it, ensuring absolute version control.
+    newTag: stable 
+
+patches:
+  - target:
+      kind: Deployment
+      name: devsecops-app
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: production

@@ -1,0 +1,24 @@
+# Node.js
+app/node_modules/
+app/npm-debug.log
+app/coverage/
+.nyc_output/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfvars
+terraform/.terraform.tfstate.lock.info
+
+# IDEs and OS
+.vscode/
+.antigravity/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
