@@ -18,6 +18,10 @@ spec:
     metadata:
       labels:
         app: devsecops-app
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/metrics"
     spec:
       securityContext:
         runAsNonRoot: true
@@ -26,7 +30,7 @@ spec:
       containers:
         - name: app
           image: devsecops-app:latest
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
           resources:

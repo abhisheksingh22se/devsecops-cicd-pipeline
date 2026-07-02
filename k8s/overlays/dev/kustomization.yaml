@@ -6,14 +6,16 @@ namespace: dev
 resources:
   - ../../base
 
-commonLabels:
-  environment: dev
+labels:
+  - includeSelectors: true
+    pairs:
+      environment: dev
 
 images:
-  - name: app
+  - name: devsecops-app
     # Replace with your actual ECR repository URI
     newName: devsecops-app
-    newTag: latest
+    newTag: local
 
 patches:
   - target:

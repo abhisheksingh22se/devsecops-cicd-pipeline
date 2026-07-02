@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devsecops-grafana-dashboard
+  namespace: monitoring 
+  labels:
+    grafana_dashboard: "1" 
+data:
+  app-performance.json: |
+    {
+      "title": "DevSecOps Application Performance",
+      "timezone": "browser",
+      "refresh": "10s",
+      "schemaVersion": 36,
+      "panels": [
+        {
+          "title": "P95 Request Duration (Seconds)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, route))",
+              "legendFormat": "{{route}}"
+            }
+          ],
+          "gridPos": { "h": 9, "w": 12, "x": 0, "y": 0 }
+        },
+        {
+          "title": "Traffic Volume by Route & Status",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(http_request_duration_seconds_count[5m])) by (route, status_code)",
+              "legendFormat": "{{route}} (HTTP {{status_code}})"
+            }
+          ],
+          "gridPos": { "h": 9, "w": 12, "x": 12, "y": 0 }
+        }
+      ]
+    }

@@ -24,4 +24,11 @@ describe("App Endpoints", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe("ready");
   });
+
+  it("GET /metrics returns Prometheus metrics", async () => {
+    const res = await request(app).get("/metrics");
+    expect(res.statusCode).toBe(200);
+    expect(res.headers['content-type']).toMatch(/text\/plain/); 
+    expect(res.text).toContain("http_request_duration_seconds"); 
+  });
 });

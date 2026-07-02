@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: devsecops-app-monitor
+  namespace: dev 
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      # This must match the labels on your devsecops-app Service
+      app: devsecops-app 
+  endpoints:
+    - port: http # This must match the name of the port in your Service definition
+      path: /metrics
+      interval: 10s

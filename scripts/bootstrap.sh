@@ -43,5 +43,7 @@ kubectl apply -f argocd/app-dev.yaml
 echo "🎉 Bootstrap complete! ArgoCD is now watching your Git repository."
 echo "(Press Ctrl+C to stop the port-forwarding when you are done exploring the UI)"
 
+kubectl apply -f argocd/monitoring.yaml
+
 # Keep script running to maintain the port-forward
 wait $PF_PID

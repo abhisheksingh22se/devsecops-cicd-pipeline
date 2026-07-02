@@ -21,4 +21,4 @@ app/coverage
 app/npm-debug.log
 
 # Tests (We run tests in CI or multi-stage build, no need to bloat the final image context)
-app/tests/
+# app/tests/
